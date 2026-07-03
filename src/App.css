@@ -178,11 +178,11 @@
 }
 
 .flash-overlay--correct {
-  background: #ffffff;
+  background: var(--correct);
 }
 
 .flash-overlay--pass {
-  background: #000000;
+  background: var(--pass);
 }
 
 @keyframes flash-fade {
