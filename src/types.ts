@@ -11,6 +11,12 @@ export type CategoryId =
   | "sports"
   | "foodAndDrink"
   | "occupations"
+  | "legalTerms"
+  | "usPresidents"
+  | "euCities"
+  | "authors"
+  | "tvShows"
+  | "worldLandmarks"
   | "randomMixed";
 
 export interface CategoryInfo {

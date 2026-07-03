@@ -11,6 +11,12 @@ import { universities } from "./universities";
 import { sports } from "./sports";
 import { foodAndDrink } from "./foodAndDrink";
 import { occupations } from "./occupations";
+import { legalTerms } from "./legalTerms";
+import { usPresidents } from "./usPresidents";
+import { euCities } from "./euCities";
+import { authors } from "./authors";
+import { tvShows } from "./tvShows";
+import { worldLandmarks } from "./worldLandmarks";
 
 const allWords = [
   ...movies,
@@ -25,6 +31,12 @@ const allWords = [
   ...sports,
   ...foodAndDrink,
   ...occupations,
+  ...legalTerms,
+  ...usPresidents,
+  ...euCities,
+  ...authors,
+  ...tvShows,
+  ...worldLandmarks,
 ];
 
 export const CATEGORIES: CategoryInfo[] = [
@@ -40,6 +52,12 @@ export const CATEGORIES: CategoryInfo[] = [
   { id: "sports", label: "Sports", words: sports },
   { id: "foodAndDrink", label: "Food & Drink", words: foodAndDrink },
   { id: "occupations", label: "Occupations", words: occupations },
+  { id: "legalTerms", label: "Legal Terms", words: legalTerms },
+  { id: "usPresidents", label: "US Presidents", words: usPresidents },
+  { id: "euCities", label: "EU Cities", words: euCities },
+  { id: "authors", label: "Authors", words: authors },
+  { id: "tvShows", label: "TV Shows", words: tvShows },
+  { id: "worldLandmarks", label: "World Landmarks", words: worldLandmarks },
   { id: "randomMixed", label: "Random Mixed", words: allWords },
 ];
 
