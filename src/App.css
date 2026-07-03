@@ -113,10 +113,12 @@
 }
 
 .game-area {
+  position: relative;
   display: flex;
   flex-direction: row;
   height: 100dvh;
   width: 100%;
+  overflow: hidden;
 }
 
 @media (orientation: portrait) {
@@ -137,40 +139,59 @@
 }
 
 .side-button {
-  flex: 0 0 22%;
+  flex: 1;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
+  padding-bottom: 20px;
   border: none;
-  color: white;
-  font-size: clamp(20px, 4vw, 32px);
-  font-weight: 800;
-  letter-spacing: 0.02em;
+  background: transparent;
   cursor: pointer;
-  transition: filter 0.15s ease;
 }
 
-.side-button--pass {
-  background: var(--pass);
-}
-
-.side-button--correct {
-  background: var(--correct);
-}
-
-.side-button--flash {
-  filter: brightness(1.5);
+.side-button-hint {
+  color: var(--text-muted);
+  opacity: 0.35;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 
 .center-content {
-  flex: 1;
+  position: absolute;
+  inset: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 16px;
   padding: 16px;
-  min-width: 0;
+  pointer-events: none;
+}
+
+.flash-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  animation: flash-fade 300ms ease-out forwards;
+}
+
+.flash-overlay--correct {
+  background: #ffffff;
+}
+
+.flash-overlay--pass {
+  background: #000000;
+}
+
+@keyframes flash-fade {
+  from {
+    opacity: 0.85;
+  }
+  to {
+    opacity: 0;
+  }
 }
 
 .timer {

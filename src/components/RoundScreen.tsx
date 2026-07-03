@@ -20,6 +20,7 @@ export function RoundScreen({ categoryId, roundLength, onFinish }: RoundScreenPr
   const [correctCount, setCorrectCount] = useState(0);
   const [passedCount, setPassedCount] = useState(0);
   const [flash, setFlash] = useState<Flash>(null);
+  const flashKeyRef = useRef(0);
 
   const finishedRef = useRef(false);
 
@@ -51,6 +52,7 @@ export function RoundScreen({ categoryId, roundLength, onFinish }: RoundScreenPr
   }
 
   function triggerFlash(type: Flash) {
+    flashKeyRef.current += 1;
     setFlash(type);
     setTimeout(() => setFlash(null), 300);
   }
@@ -79,12 +81,17 @@ export function RoundScreen({ categoryId, roundLength, onFinish }: RoundScreenPr
       </div>
 
       <div className="game-area">
+        <button type="button" className="side-button side-button--pass" onClick={handlePass} aria-label="Pass">
+          <span className="side-button-hint">Pass</span>
+        </button>
+
         <button
           type="button"
-          className={"side-button side-button--pass" + (flash === "pass" ? " side-button--flash" : "")}
-          onClick={handlePass}
+          className="side-button side-button--correct"
+          onClick={handleCorrect}
+          aria-label="Correct"
         >
-          Pass
+          <span className="side-button-hint">Correct</span>
         </button>
 
         <div className="center-content">
@@ -92,13 +99,7 @@ export function RoundScreen({ categoryId, roundLength, onFinish }: RoundScreenPr
           <div className="word-display">{currentWord}</div>
         </div>
 
-        <button
-          type="button"
-          className={"side-button side-button--correct" + (flash === "correct" ? " side-button--flash" : "")}
-          onClick={handleCorrect}
-        >
-          Correct
-        </button>
+        {flash && <div key={flashKeyRef.current} className={`flash-overlay flash-overlay--${flash}`} />}
       </div>
     </div>
   );
