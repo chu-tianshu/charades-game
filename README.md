@@ -1,32 +1,17 @@
-# React + TypeScript + Vite
+# Charades
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Play at: **https://charades-game-blue.vercel.app**
 
-Currently, two official plugins are available:
+## How to Play
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+1. **Choose a category** — Movies, Animals, Actions, Famous People, Countries, Famous Cities, Household Items, Computer Terminology, Universities, Sports, Food & Drink, Occupations, or Random Mixed (a bit of everything).
+2. **Choose a round length** — 30s, 60s, 90s, 2m, 3m, 4m, or 5m.
+3. Hit **Start Round**. Rotate your phone to landscape — one player acts out (or describes, depending on the category) the word shown on screen while everyone else guesses.
+4. Whoever is watching taps a side of the screen to score it:
+   - Tap the **right side** when the group guesses correctly.
+   - Tap the **left side** to pass and skip to the next word.
+   - Each tap flashes the screen (white for correct, black for pass) and immediately loads the next word.
+5. The timer counts down continuously. When it hits zero, the round ends automatically — wherever you are in the word list.
+6. See your final **Correct** vs **Passed** count, then **Play Again** with the same settings or start a **New Round** to change the category or timer.
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
-```
-
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+No accounts, no sign-up — just pick your settings and play.
