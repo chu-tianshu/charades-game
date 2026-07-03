@@ -19,7 +19,7 @@ export interface CategoryInfo {
   words: string[];
 }
 
-export type RoundLength = 30 | 60 | 90 | 120;
+export type RoundLength = 30 | 60 | 90 | 120 | 180 | 240 | 300;
 
 export type Screen = "setup" | "round" | "results";
 

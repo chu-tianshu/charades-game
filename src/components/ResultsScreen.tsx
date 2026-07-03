@@ -1,3 +1,4 @@
+import { formatRoundLength } from "../utils/formatRoundLength";
 import type { RoundResult } from "../types";
 
 interface ResultsScreenProps {
@@ -11,7 +12,7 @@ export function ResultsScreen({ result, onPlayAgain, onNewRound }: ResultsScreen
     <div className="results-screen">
       <h1 className="app-title">Round Over!</h1>
       <p className="results-meta">
-        {result.categoryLabel} &middot; {result.roundLength}s
+        {result.categoryLabel} &middot; {formatRoundLength(result.roundLength)}
       </p>
 
       <div className="results-stats">

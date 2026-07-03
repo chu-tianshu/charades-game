@@ -1,7 +1,8 @@
 import { CATEGORIES } from "../data/categories";
+import { formatRoundLength } from "../utils/formatRoundLength";
 import type { CategoryId, RoundLength } from "../types";
 
-const ROUND_LENGTHS: RoundLength[] = [30, 60, 90, 120];
+const ROUND_LENGTHS: RoundLength[] = [30, 60, 90, 120, 180, 240, 300];
 
 interface SetupScreenProps {
   categoryId: CategoryId;
@@ -52,7 +53,7 @@ export function SetupScreen({
               }
               onClick={() => onRoundLengthChange(length)}
             >
-              {length}s
+              {formatRoundLength(length)}
             </button>
           ))}
         </div>
