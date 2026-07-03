@@ -72,8 +72,6 @@ export function RoundScreen({ categoryId, roundLength, onFinish }: RoundScreenPr
     setCurrentWord(deck[0]);
   }
 
-  const flashClass = flash ? ` half--flash-${flash}` : "";
-
   return (
     <div className="round-screen">
       <div className="rotate-prompt">
@@ -81,44 +79,24 @@ export function RoundScreen({ categoryId, roundLength, onFinish }: RoundScreenPr
       </div>
 
       <div className="game-area">
-        <div className={"half half--top" + flashClass}>
-          <HalfContent
-            word={currentWord}
-            timeLeft={timeLeft}
-            onCorrect={handleCorrect}
-            onPass={handlePass}
-          />
-        </div>
-        <div className={"half half--bottom" + flashClass}>
-          <HalfContent
-            word={currentWord}
-            timeLeft={timeLeft}
-            onCorrect={handleCorrect}
-            onPass={handlePass}
-          />
-        </div>
-      </div>
-    </div>
-  );
-}
-
-interface HalfContentProps {
-  word: string;
-  timeLeft: number;
-  onCorrect: () => void;
-  onPass: () => void;
-}
-
-function HalfContent({ word, timeLeft, onCorrect, onPass }: HalfContentProps) {
-  return (
-    <div className="half-content">
-      <div className="timer">{timeLeft}s</div>
-      <div className="word-display">{word}</div>
-      <div className="button-row">
-        <button type="button" className="pass-button" onClick={onPass}>
+        <button
+          type="button"
+          className={"side-button side-button--pass" + (flash === "pass" ? " side-button--flash" : "")}
+          onClick={handlePass}
+        >
           Pass
         </button>
-        <button type="button" className="correct-button" onClick={onCorrect}>
+
+        <div className="center-content">
+          <div className="timer">{timeLeft}s</div>
+          <div className="word-display">{currentWord}</div>
+        </div>
+
+        <button
+          type="button"
+          className={"side-button side-button--correct" + (flash === "correct" ? " side-button--flash" : "")}
+          onClick={handleCorrect}
+        >
           Correct
         </button>
       </div>

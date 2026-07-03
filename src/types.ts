@@ -1,4 +1,17 @@
-export type CategoryId = "movies" | "animals" | "actions" | "famousPeople" | "randomMixed";
+export type CategoryId =
+  | "movies"
+  | "animals"
+  | "actions"
+  | "famousPeople"
+  | "countries"
+  | "famousCities"
+  | "householdItems"
+  | "computerTerminology"
+  | "universities"
+  | "sports"
+  | "foodAndDrink"
+  | "occupations"
+  | "randomMixed";
 
 export interface CategoryInfo {
   id: CategoryId;

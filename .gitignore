@@ -25,3 +25,6 @@ dist-ssr
 *.sln
 *.sw?
 .claude/scheduled_tasks.lock
+
+.vercel
+.env*

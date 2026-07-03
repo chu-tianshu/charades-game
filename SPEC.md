@@ -1,7 +1,7 @@
 # Charades Web App — Spec
 
 ## Overview
-A mobile-friendly web app for playing charades with a single phone held between two people. The phone is split into two halves, each oriented for one player. Built as a static React + Vite app, deployed to Vercel.
+A mobile-friendly web app for playing charades. Built as a static React + Vite app, deployed to Vercel.
 
 ## Core Flow
 
@@ -10,12 +10,11 @@ A mobile-friendly web app for playing charades with a single phone held between 
    - Choose a **round length** from timer presets.
    - "Start Round" button.
 
-2. **Round screen** (landscape-locked, split into two halves)
-   - The screen is divided into two rectangular halves stacked vertically, the top half rotated 180° so each half faces one of the two players sitting across from each other.
-   - **Performer's half**: shows the current word (large text) and the countdown timer.
-   - **Watcher's half** (rotated): shows the same word/timer upside-down relative to the performer, plus **Pass** and **Correct** buttons — this is the person who can see the audience/performer and taps the outcome.
+2. **Round screen** (landscape-locked, single orientation)
+   - Full-screen landscape layout: a **Pass** button fills the left edge, a **Correct** button fills the right edge, and the current word + countdown timer are centered between them.
+   - No mirrored/rotated content — one upright layout, tapped from whichever side is convenient.
    - Tapping **Correct** or **Pass**:
-     - Brief color flash (green for correct, red/gray for pass) as visual feedback.
+     - Brief brightness flash on the tapped button as visual feedback.
      - Advances immediately to the next word.
      - Increments the correct or pass counter for the round.
    - Timer counts down continuously across words; when it hits 0, the round ends automatically regardless of which word is showing.
@@ -29,13 +28,21 @@ A mobile-friendly web app for playing charades with a single phone held between 
 ## Setup Options
 
 ### Categories (built-in, curated word lists)
-- Movies
-- Animals
-- Actions/Verbs
-- Famous People
-- Random Mixed (pulls from all categories)
+- Movies — 1000 words
+- Animals — 1000 words
+- Actions/Verbs — 1000 words
+- Famous People — 1000 words
+- Countries — 200 words
+- Famous Cities — 200 words
+- Household Items — 200 words
+- Computer Terminology — 200 words
+- Universities — 200 words
+- Sports — 200 words
+- Food & Drink — 200 words
+- Occupations — 200 words
+- Random Mixed (pulls from all of the above)
 
-Each category is a static array of **1000 words/phrases** baked into the app (no backend, no database).
+Each category is a static array baked into the app (no backend, no database).
 
 ### Round Length (timer presets)
 - 30 seconds
@@ -47,10 +54,9 @@ No custom entry, no word-count mode — just pick one of the four presets.
 
 ## Layout & Interaction Details
 
-- **Orientation**: Round screen is locked to landscape. On phones, this is done via CSS (`@media` + a rotation transform prompting the user to rotate the device) since the JS Screen Orientation lock API isn't reliably available on iOS Safari — if the device is portrait, show a "rotate your phone" prompt instead of the round UI.
-- **Split screen**: Two equal halves of the viewport; the top half's content is rotated 180° with CSS so it reads correctly for someone sitting on the opposite side of the phone.
-- **Buttons**: Pass and Correct buttons appear on **both halves** (so either player can tap, in case roles swap or a solo scorekeeper is on one side) — sized large for thumb taps.
-- **Feedback**: Visual-only — brief full-half background color flash on tap (no sound, no vibration, per requirements). No orientation-lock haptics.
+- **Orientation**: Round screen is locked to landscape. On phones, this is done via CSS (`@media (orientation: portrait)`) since the JS Screen Orientation lock API isn't reliably available on iOS Safari — if the device is portrait, show a "rotate your phone" prompt instead of the round UI.
+- **Layout**: One upright landscape layout — Pass button as a full-height strip on the left, Correct button as a full-height strip on the right, word + timer centered between them. No mirrored/rotated content.
+- **Feedback**: Visual-only — brief brightness flash on the tapped side button (no sound, no vibration, per requirements).
 - **No teams/scoring across rounds**: each round is a standalone session; scores don't persist between rounds beyond the immediate results screen.
 
 ## Tech Stack

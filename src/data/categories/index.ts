@@ -3,17 +3,44 @@ import { movies } from "./movies";
 import { animals } from "./animals";
 import { actions } from "./actions";
 import { famousPeople } from "./famousPeople";
+import { countries } from "./countries";
+import { famousCities } from "./famousCities";
+import { householdItems } from "./householdItems";
+import { computerTerminology } from "./computerTerminology";
+import { universities } from "./universities";
+import { sports } from "./sports";
+import { foodAndDrink } from "./foodAndDrink";
+import { occupations } from "./occupations";
+
+const allWords = [
+  ...movies,
+  ...animals,
+  ...actions,
+  ...famousPeople,
+  ...countries,
+  ...famousCities,
+  ...householdItems,
+  ...computerTerminology,
+  ...universities,
+  ...sports,
+  ...foodAndDrink,
+  ...occupations,
+];
 
 export const CATEGORIES: CategoryInfo[] = [
   { id: "movies", label: "Movies", words: movies },
   { id: "animals", label: "Animals", words: animals },
   { id: "actions", label: "Actions", words: actions },
   { id: "famousPeople", label: "Famous People", words: famousPeople },
-  {
-    id: "randomMixed",
-    label: "Random Mixed",
-    words: [...movies, ...animals, ...actions, ...famousPeople],
-  },
+  { id: "countries", label: "Countries", words: countries },
+  { id: "famousCities", label: "Famous Cities", words: famousCities },
+  { id: "householdItems", label: "Household Items", words: householdItems },
+  { id: "computerTerminology", label: "Computer Terminology", words: computerTerminology },
+  { id: "universities", label: "Universities", words: universities },
+  { id: "sports", label: "Sports", words: sports },
+  { id: "foodAndDrink", label: "Food & Drink", words: foodAndDrink },
+  { id: "occupations", label: "Occupations", words: occupations },
+  { id: "randomMixed", label: "Random Mixed", words: allWords },
 ];
 
 export function getCategoryById(id: CategoryInfo["id"]): CategoryInfo {
