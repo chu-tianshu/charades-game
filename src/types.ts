@@ -17,6 +17,13 @@ export type CategoryId =
   | "authors"
   | "tvShows"
   | "worldLandmarks"
+  | "chineseFamousPeople"
+  | "chineseCities"
+  | "chineseUniversities"
+  | "chineseEmperors"
+  | "chineseLandmarks"
+  | "chinesePoliticians"
+  | "climbing"
   | "randomMixed";
 
 export interface CategoryInfo {
@@ -30,8 +37,8 @@ export type RoundLength = 30 | 60 | 90 | 120 | 180 | 240 | 300;
 export type Screen = "setup" | "round" | "results";
 
 export interface RoundResult {
-  correct: number;
-  passed: number;
+  correctWords: string[];
+  passedWords: string[];
   categoryLabel: string;
   roundLength: RoundLength;
 }

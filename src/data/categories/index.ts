@@ -17,6 +17,13 @@ import { euCities } from "./euCities";
 import { authors } from "./authors";
 import { tvShows } from "./tvShows";
 import { worldLandmarks } from "./worldLandmarks";
+import { chineseFamousPeople } from "./chineseFamousPeople";
+import { chineseCities } from "./chineseCities";
+import { chineseUniversities } from "./chineseUniversities";
+import { chineseEmperors } from "./chineseEmperors";
+import { chineseLandmarks } from "./chineseLandmarks";
+import { chinesePoliticians } from "./chinesePoliticians";
+import { climbing } from "./climbing";
 
 const allWords = [
   ...movies,
@@ -37,6 +44,13 @@ const allWords = [
   ...authors,
   ...tvShows,
   ...worldLandmarks,
+  ...chineseFamousPeople,
+  ...chineseCities,
+  ...chineseUniversities,
+  ...chineseEmperors,
+  ...chineseLandmarks,
+  ...chinesePoliticians,
+  ...climbing,
 ];
 
 export const CATEGORIES: CategoryInfo[] = [
@@ -58,6 +72,13 @@ export const CATEGORIES: CategoryInfo[] = [
   { id: "authors", label: "Authors", words: authors },
   { id: "tvShows", label: "TV Shows", words: tvShows },
   { id: "worldLandmarks", label: "World Landmarks", words: worldLandmarks },
+  { id: "chineseFamousPeople", label: "Chinese Famous People", words: chineseFamousPeople },
+  { id: "chineseCities", label: "Chinese Cities", words: chineseCities },
+  { id: "chineseUniversities", label: "Chinese Universities", words: chineseUniversities },
+  { id: "chineseEmperors", label: "Chinese Emperors", words: chineseEmperors },
+  { id: "chineseLandmarks", label: "Chinese Landmarks", words: chineseLandmarks },
+  { id: "chinesePoliticians", label: "Chinese Politicians", words: chinesePoliticians },
+  { id: "climbing", label: "Climbing", words: climbing },
   { id: "randomMixed", label: "Random Mixed", words: allWords },
 ];
 

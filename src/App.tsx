@@ -48,6 +48,7 @@ function App() {
           categoryId={categoryId}
           roundLength={roundLength}
           onFinish={handleRoundFinish}
+          onExit={handleNewRound}
         />
       )}
       {screen === "results" && result && (
