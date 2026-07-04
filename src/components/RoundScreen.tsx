@@ -163,7 +163,7 @@ export function RoundScreen({ categoryId, roundLength, onFinish, onExit }: Round
 
         {phase === "playing" && (
           <div className="center-content">
-            <div className="timer">{timeLeft}s</div>
+            <div className={`timer${timeLeft <= 10 ? " timer--warning" : ""}`}>{timeLeft}s</div>
             <div
               key={flipKeyRef.current}
               className={`word-display${flipDirection ? ` word-display--flip-${flipDirection}` : ""}`}
