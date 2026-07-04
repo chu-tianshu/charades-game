@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import type { PointerEvent as ReactPointerEvent } from "react";
 import { getCategoryById } from "../data/categories";
 import { shuffle } from "../utils/shuffle";
@@ -35,6 +35,33 @@ export function RoundScreen({ categoryId, roundLength, onFinish, onExit }: Round
   const [countdownValue, setCountdownValue] = useState(COUNTDOWN_START);
 
   const finishedRef = useRef(false);
+  const wordDisplayRef = useRef<HTMLDivElement | null>(null);
+
+  useLayoutEffect(() => {
+    function fitWordText() {
+      const el = wordDisplayRef.current;
+      const container = el?.parentElement;
+      if (!el || !container) return;
+
+      const maxWidth = container.clientWidth - 24;
+      const maxHeight = container.clientHeight * 0.6;
+      const upperBound = Math.min(152, container.clientWidth * 0.22);
+
+      let fontSize = upperBound;
+      el.style.fontSize = `${fontSize}px`;
+
+      let guard = 0;
+      while (fontSize > 24 && guard < 60 && (el.scrollWidth > maxWidth || el.scrollHeight > maxHeight)) {
+        fontSize -= 3;
+        el.style.fontSize = `${fontSize}px`;
+        guard++;
+      }
+    }
+
+    fitWordText();
+    window.addEventListener("resize", fitWordText);
+    return () => window.removeEventListener("resize", fitWordText);
+  }, [currentWord]);
 
   useEffect(() => {
     if (phase !== "playing") return;
@@ -165,6 +192,7 @@ export function RoundScreen({ categoryId, roundLength, onFinish, onExit }: Round
           <div className="center-content">
             <div className={`timer${timeLeft <= 10 ? " timer--warning" : ""}`}>{timeLeft}s</div>
             <div
+              ref={wordDisplayRef}
               key={flipKeyRef.current}
               className={`word-display${flipDirection ? ` word-display--flip-${flipDirection}` : ""}`}
             >
