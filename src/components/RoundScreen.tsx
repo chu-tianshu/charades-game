@@ -7,6 +7,7 @@ import type { CategoryId, RoundLength, RoundResult } from "../types";
 interface RoundScreenProps {
   categoryId: CategoryId;
   roundLength: RoundLength;
+  usedWords: Set<string>;
   onFinish: (result: RoundResult) => void;
   onExit: () => void;
 }
@@ -17,10 +18,15 @@ type RoundPhase = "intro" | "countdown" | "playing";
 const FLASH_DURATION_MS = 300;
 const COUNTDOWN_START = 3;
 
-export function RoundScreen({ categoryId, roundLength, onFinish, onExit }: RoundScreenProps) {
+function freshWordPool(allWords: string[], usedWords: Set<string>): string[] {
+  const unused = allWords.filter((word) => !usedWords.has(word));
+  return unused.length > 0 ? unused : allWords;
+}
+
+export function RoundScreen({ categoryId, roundLength, usedWords, onFinish, onExit }: RoundScreenProps) {
   const category = getCategoryById(categoryId);
 
-  const deckRef = useRef<string[]>(shuffle(category.words));
+  const deckRef = useRef<string[]>(shuffle(freshWordPool(category.words, usedWords)));
   const [currentWord, setCurrentWord] = useState<string>(deckRef.current[0]);
   const [timeLeft, setTimeLeft] = useState<number>(roundLength);
   const [correctWords, setCorrectWords] = useState<string[]>([]);
@@ -97,7 +103,7 @@ export function RoundScreen({ categoryId, roundLength, onFinish, onExit }: Round
     const deck = deckRef.current;
     deck.shift();
     if (deck.length === 0) {
-      deckRef.current = shuffle(category.words);
+      deckRef.current = shuffle(freshWordPool(category.words, usedWords));
     }
     setCurrentWord(deckRef.current[0]);
   }
