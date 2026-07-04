@@ -1,5 +1,4 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import type { PointerEvent as ReactPointerEvent } from "react";
 import { getCategoryById } from "../data/categories";
 import { shuffle } from "../utils/shuffle";
 import { formatRoundLength } from "../utils/formatRoundLength";
@@ -12,11 +11,10 @@ interface RoundScreenProps {
   onExit: () => void;
 }
 
-type FlipDirection = "correct" | "pass" | null;
+type Flash = "correct" | "pass" | null;
 type RoundPhase = "intro" | "countdown" | "playing";
 
-const FLIP_DURATION_MS = 400;
-const SWIPE_THRESHOLD_PX = 60;
+const FLASH_DURATION_MS = 300;
 const COUNTDOWN_START = 3;
 
 export function RoundScreen({ categoryId, roundLength, onFinish, onExit }: RoundScreenProps) {
@@ -27,9 +25,7 @@ export function RoundScreen({ categoryId, roundLength, onFinish, onExit }: Round
   const [timeLeft, setTimeLeft] = useState<number>(roundLength);
   const [correctWords, setCorrectWords] = useState<string[]>([]);
   const [passedWords, setPassedWords] = useState<string[]>([]);
-  const [flipDirection, setFlipDirection] = useState<FlipDirection>(null);
-  const flipKeyRef = useRef(0);
-  const swipeStartXRef = useRef<number | null>(null);
+  const [flash, setFlash] = useState<Flash>(null);
 
   const [phase, setPhase] = useState<RoundPhase>("intro");
   const [countdownValue, setCountdownValue] = useState(COUNTDOWN_START);
@@ -106,64 +102,35 @@ export function RoundScreen({ categoryId, roundLength, onFinish, onExit }: Round
     setCurrentWord(deckRef.current[0]);
   }
 
-  function triggerFlip(direction: FlipDirection) {
-    flipKeyRef.current += 1;
-    setFlipDirection(direction);
-    setTimeout(() => setFlipDirection(null), FLIP_DURATION_MS);
+  function triggerFlash(type: Flash) {
+    setFlash(type);
+    setTimeout(() => setFlash(null), FLASH_DURATION_MS);
   }
 
   function handleCorrect() {
-    if (phase !== "playing" || timeLeft <= 0 || flipDirection) return;
+    if (phase !== "playing" || timeLeft <= 0 || flash) return;
     const guessedWord = currentWord;
     setCorrectWords((words) => [...words, guessedWord]);
-    triggerFlip("correct");
-    setTimeout(() => drawNextWord(), FLIP_DURATION_MS / 2);
+    triggerFlash("correct");
+    setTimeout(() => drawNextWord(), FLASH_DURATION_MS);
   }
 
   function handlePass() {
-    if (phase !== "playing" || timeLeft <= 0 || flipDirection) return;
+    if (phase !== "playing" || timeLeft <= 0 || flash) return;
     const guessedWord = currentWord;
     setPassedWords((words) => [...words, guessedWord]);
-    triggerFlip("pass");
+    triggerFlash("pass");
     setTimeout(() => {
       const deck = deckRef.current;
       const passedWord = deck.shift()!;
       deck.push(passedWord);
       setCurrentWord(deck[0]);
-    }, FLIP_DURATION_MS / 2);
-  }
-
-  function handleSwipeStart(event: ReactPointerEvent<HTMLDivElement>) {
-    if (phase !== "playing") return;
-    swipeStartXRef.current = event.clientX;
-  }
-
-  function handleSwipeEnd(event: ReactPointerEvent<HTMLDivElement>) {
-    const startX = swipeStartXRef.current;
-    swipeStartXRef.current = null;
-    if (startX === null) return;
-    const deltaX = event.clientX - startX;
-    if (deltaX >= SWIPE_THRESHOLD_PX) {
-      handleCorrect();
-    } else if (deltaX <= -SWIPE_THRESHOLD_PX) {
-      handlePass();
-    }
+    }, FLASH_DURATION_MS);
   }
 
   return (
     <div className="round-screen">
-      <div className="rotate-prompt">
-        <p>Rotate your device to landscape to play</p>
-      </div>
-
-      <div
-        className="game-area"
-        onPointerDown={handleSwipeStart}
-        onPointerUp={handleSwipeEnd}
-        onPointerCancel={() => {
-          swipeStartXRef.current = null;
-        }}
-      >
+      <div className="game-area">
         <button type="button" className="exit-round-button" onClick={onExit} aria-label="Exit round">
           ✕
         </button>
@@ -172,8 +139,8 @@ export function RoundScreen({ categoryId, roundLength, onFinish, onExit }: Round
           <div className="round-intro" onClick={startCountdown}>
             <p className="round-intro-category">{category.label}</p>
             <p className="round-intro-description">
-              Act out or describe as many {category.label} as you can before time runs out. Swipe right
-              when your team guesses correctly, swipe left to pass.
+              Act out or describe as many {category.label} as you can before time runs out. Tap the right
+              side when your team guesses correctly, tap the left side to pass.
             </p>
             <p className="round-intro-meta">{formatRoundLength(roundLength)} round</p>
             <p className="round-intro-hint">Tap anywhere to begin</p>
@@ -189,16 +156,25 @@ export function RoundScreen({ categoryId, roundLength, onFinish, onExit }: Round
         )}
 
         {phase === "playing" && (
-          <div className="center-content">
-            <div className={`timer${timeLeft <= 10 ? " timer--warning" : ""}`}>{timeLeft}s</div>
-            <div
-              ref={wordDisplayRef}
-              key={flipKeyRef.current}
-              className={`word-display${flipDirection ? ` word-display--flip-${flipDirection}` : ""}`}
-            >
-              {currentWord}
+          <>
+            <button type="button" className="side-button side-button--pass" onClick={handlePass} aria-label="Pass" />
+            <button
+              type="button"
+              className="side-button side-button--correct"
+              onClick={handleCorrect}
+              aria-label="Correct"
+            />
+
+            <div className="center-content">
+              <div className={`timer${timeLeft <= 10 ? " timer--warning" : ""}`}>{timeLeft}s</div>
+              <div
+                ref={wordDisplayRef}
+                className={`word-display${flash ? ` word-display--flash-${flash}` : ""}`}
+              >
+                {currentWord}
+              </div>
             </div>
-          </div>
+          </>
         )}
       </div>
     </div>

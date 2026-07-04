@@ -108,10 +108,6 @@
   background: var(--bg);
 }
 
-.rotate-prompt {
-  display: none;
-}
-
 .game-area {
   position: relative;
   display: flex;
@@ -119,24 +115,13 @@
   height: 100dvh;
   width: 100%;
   overflow: hidden;
-  touch-action: none;
 }
 
-@media (orientation: portrait) {
-  .rotate-prompt {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100dvh;
-    padding: 32px;
-    text-align: center;
-    font-size: 22px;
-    color: var(--text-muted);
-  }
-
-  .game-area {
-    display: none;
-  }
+.side-button {
+  flex: 1;
+  border: none;
+  background: transparent;
+  cursor: pointer;
 }
 
 .exit-round-button {
@@ -170,7 +155,6 @@
   gap: 16px;
   padding: 16px;
   pointer-events: none;
-  perspective: 1000px;
 }
 
 .round-intro {
@@ -275,55 +259,34 @@
   font-weight: 700;
   text-align: center;
   line-height: 1.15;
-  padding: 0 12px;
+  padding: 8px 20px;
   max-width: 100%;
-  backface-visibility: hidden;
-  transform-style: preserve-3d;
+  border-radius: 20px;
 }
 
-.word-display--flip-correct {
-  animation: page-flip-right 0.4s ease-in-out;
+.word-display--flash-correct {
+  animation: word-flash-correct 300ms ease-out;
 }
 
-.word-display--flip-pass {
-  animation: page-flip-left 0.4s ease-in-out;
+.word-display--flash-pass {
+  animation: word-flash-pass 300ms ease-out;
 }
 
-@keyframes page-flip-right {
+@keyframes word-flash-correct {
   0% {
-    transform: translateX(0) rotateY(0deg);
-    opacity: 1;
-  }
-  50% {
-    transform: translateX(60%) rotateY(-90deg);
-    opacity: 0.3;
-  }
-  50.01% {
-    transform: translateX(-60%) rotateY(90deg);
-    opacity: 0.3;
+    background-color: color-mix(in srgb, var(--correct) 55%, transparent);
   }
   100% {
-    transform: translateX(0) rotateY(0deg);
-    opacity: 1;
+    background-color: transparent;
   }
 }
 
-@keyframes page-flip-left {
+@keyframes word-flash-pass {
   0% {
-    transform: translateX(0) rotateY(0deg);
-    opacity: 1;
-  }
-  50% {
-    transform: translateX(-60%) rotateY(90deg);
-    opacity: 0.3;
-  }
-  50.01% {
-    transform: translateX(60%) rotateY(-90deg);
-    opacity: 0.3;
+    background-color: color-mix(in srgb, var(--pass) 55%, transparent);
   }
   100% {
-    transform: translateX(0) rotateY(0deg);
-    opacity: 1;
+    background-color: transparent;
   }
 }
 
