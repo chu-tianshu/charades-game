@@ -68,7 +68,7 @@ export const CATEGORIES: CategoryInfo[] = [
   { id: "occupations", label: "Occupations", words: occupations },
   { id: "legalTerms", label: "Legal Terms", words: legalTerms },
   { id: "usPresidents", label: "US Presidents", words: usPresidents },
-  { id: "euCities", label: "EU Cities", words: euCities },
+  { id: "euCities", label: "European Cities", words: euCities },
   { id: "authors", label: "Authors", words: authors },
   { id: "tvShows", label: "TV Shows", words: tvShows },
   { id: "worldLandmarks", label: "World Landmarks", words: worldLandmarks },
