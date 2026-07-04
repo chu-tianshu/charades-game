@@ -61,7 +61,7 @@ export function RoundScreen({ categoryId, roundLength, onFinish, onExit }: Round
     fitWordText();
     window.addEventListener("resize", fitWordText);
     return () => window.removeEventListener("resize", fitWordText);
-  }, [currentWord]);
+  }, [currentWord, phase]);
 
   useEffect(() => {
     if (phase !== "playing") return;
