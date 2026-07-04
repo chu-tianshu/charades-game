@@ -162,20 +162,15 @@ export function RoundScreen({ categoryId, roundLength, onFinish, onExit }: Round
         )}
 
         {phase === "playing" && (
-          <>
-            <div className="side-hint side-hint--pass">Pass</div>
-            <div className="side-hint side-hint--correct">Correct</div>
-
-            <div className="center-content">
-              <div className="timer">{timeLeft}s</div>
-              <div
-                key={flipKeyRef.current}
-                className={`word-display${flipDirection ? ` word-display--flip-${flipDirection}` : ""}`}
-              >
-                {currentWord}
-              </div>
+          <div className="center-content">
+            <div className="timer">{timeLeft}s</div>
+            <div
+              key={flipKeyRef.current}
+              className={`word-display${flipDirection ? ` word-display--flip-${flipDirection}` : ""}`}
+            >
+              {currentWord}
             </div>
-          </>
+          </div>
         )}
       </div>
     </div>

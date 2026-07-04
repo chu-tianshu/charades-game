@@ -160,26 +160,6 @@
   border-color: var(--accent-strong);
 }
 
-.side-hint {
-  position: absolute;
-  bottom: 20px;
-  pointer-events: none;
-  color: var(--text-muted);
-  opacity: 0.35;
-  font-size: 13px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
-
-.side-hint--pass {
-  left: 20px;
-}
-
-.side-hint--correct {
-  right: 20px;
-}
-
 .center-content {
   position: absolute;
   inset: 0;
