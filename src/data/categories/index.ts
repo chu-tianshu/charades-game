@@ -24,6 +24,7 @@ import { chineseEmperors } from "./chineseEmperors";
 import { chineseLandmarks } from "./chineseLandmarks";
 import { chinesePoliticians } from "./chinesePoliticians";
 import { climbing } from "./climbing";
+import { climbers } from "./climbers";
 
 const allWords = [
   ...movies,
@@ -51,6 +52,7 @@ const allWords = [
   ...chineseLandmarks,
   ...chinesePoliticians,
   ...climbing,
+  ...climbers,
 ];
 
 export const CATEGORIES: CategoryInfo[] = [
@@ -79,6 +81,7 @@ export const CATEGORIES: CategoryInfo[] = [
   { id: "chineseLandmarks", label: "Chinese Landmarks", words: chineseLandmarks },
   { id: "chinesePoliticians", label: "Chinese Politicians", words: chinesePoliticians },
   { id: "climbing", label: "Climbing", words: climbing },
+  { id: "climbers", label: "Climbers", words: climbers },
   { id: "randomMixed", label: "Random Mixed", words: allWords },
 ];
 
