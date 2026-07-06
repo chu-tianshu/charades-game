@@ -100,6 +100,46 @@
   border-color: var(--accent-strong);
 }
 
+.secondary-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.feedback-section {
+  margin-top: 36px;
+}
+
+.feedback-textarea {
+  width: 100%;
+  min-height: 100px;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--bg-elevated);
+  color: var(--text);
+  font: inherit;
+  font-size: 15px;
+  resize: vertical;
+  margin-bottom: 10px;
+}
+
+.feedback-textarea:focus {
+  outline: none;
+  border-color: var(--accent-strong);
+}
+
+.feedback-sent-note {
+  margin: 10px 0 0;
+  color: var(--correct);
+  font-size: 14px;
+}
+
+.feedback-error-note {
+  margin: 10px 0 0;
+  color: var(--pass);
+  font-size: 14px;
+}
+
 /* ---------- Round screen ---------- */
 
 .round-screen {
