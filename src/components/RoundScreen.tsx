@@ -73,6 +73,7 @@ export function RoundScreen({ categoryId, roundLength, usedWords, onFinish, onEx
         onFinish({
           correctWords,
           passedWords,
+          categoryId,
           categoryLabel: category.label,
           roundLength,
         });

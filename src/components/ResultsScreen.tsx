@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { formatRoundLength } from "../utils/formatRoundLength";
+import { getCategoryById } from "../data/categories";
 import type { RoundResult } from "../types";
 
 interface ResultsScreenProps {
@@ -7,7 +9,19 @@ interface ResultsScreenProps {
   onNewRound: () => void;
 }
 
+interface SelectedWord {
+  word: string;
+  description: string;
+}
+
 export function ResultsScreen({ result, onPlayAgain, onNewRound }: ResultsScreenProps) {
+  const [selected, setSelected] = useState<SelectedWord | null>(null);
+  const descriptions = getCategoryById(result.categoryId).descriptions;
+
+  function showDescription(word: string) {
+    setSelected({ word, description: descriptions[word] ?? "No description available for this one yet." });
+  }
+
   return (
     <div className="results-screen">
       <h1 className="app-title">Round Over!</h1>
@@ -26,14 +40,21 @@ export function ResultsScreen({ result, onPlayAgain, onNewRound }: ResultsScreen
         </div>
       </div>
 
+      <p className="results-hint">Tap a word to see what it was</p>
+
       {result.correctWords.length > 0 && (
         <div className="results-word-group">
           <p className="results-word-group-title">Correct</p>
           <div className="results-word-list">
             {result.correctWords.map((word, index) => (
-              <span key={index} className="results-word-chip results-word-chip--correct">
+              <button
+                key={index}
+                type="button"
+                className="results-word-chip results-word-chip--correct"
+                onClick={() => showDescription(word)}
+              >
                 {word}
-              </span>
+              </button>
             ))}
           </div>
         </div>
@@ -44,9 +65,14 @@ export function ResultsScreen({ result, onPlayAgain, onNewRound }: ResultsScreen
           <p className="results-word-group-title">Passed</p>
           <div className="results-word-list">
             {result.passedWords.map((word, index) => (
-              <span key={index} className="results-word-chip results-word-chip--passed">
+              <button
+                key={index}
+                type="button"
+                className="results-word-chip results-word-chip--passed"
+                onClick={() => showDescription(word)}
+              >
                 {word}
-              </span>
+              </button>
             ))}
           </div>
         </div>
@@ -60,6 +86,18 @@ export function ResultsScreen({ result, onPlayAgain, onNewRound }: ResultsScreen
           New Round
         </button>
       </div>
+
+      {selected && (
+        <div className="word-detail-overlay" onClick={() => setSelected(null)}>
+          <div className="word-detail-card" onClick={(event) => event.stopPropagation()}>
+            <p className="word-detail-title">{selected.word}</p>
+            <p className="word-detail-description">{selected.description}</p>
+            <button type="button" className="word-detail-close" onClick={() => setSelected(null)}>
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
