@@ -1,3 +1,5 @@
+/// <reference types="node" />
+
 interface FeedbackRequest {
   method?: string;
   body?: unknown;
@@ -8,7 +10,7 @@ interface FeedbackResponse {
   json(body: unknown): void;
 }
 
-const FEEDBACK_TO_EMAIL = "cts2003258@gmail.com";
+const FEEDBACK_TO_EMAIL = "tianshu.chu.tc@gmail.com";
 const MAX_MESSAGE_LENGTH = 5000;
 
 export default async function handler(req: FeedbackRequest, res: FeedbackResponse) {
