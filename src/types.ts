@@ -26,6 +26,7 @@ export type CategoryId =
   | "climbing"
   | "climbers"
   | "brands"
+  | "airports"
   | "randomMixed";
 
 export interface CategoryInfo {
