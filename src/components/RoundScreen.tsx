@@ -1,11 +1,10 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { getCategoryById } from "../data/categories";
 import { shuffle } from "../utils/shuffle";
 import { formatRoundLength } from "../utils/formatRoundLength";
-import type { CategoryId, RoundLength, RoundResult } from "../types";
+import type { CategoryInfo, RoundLength, RoundResult } from "../types";
 
 interface RoundScreenProps {
-  categoryId: CategoryId;
+  category: CategoryInfo;
   roundLength: RoundLength;
   usedWords: Set<string>;
   onFinish: (result: RoundResult) => void;
@@ -23,9 +22,7 @@ function freshWordPool(allWords: string[], usedWords: Set<string>): string[] {
   return unused.length > 0 ? unused : allWords;
 }
 
-export function RoundScreen({ categoryId, roundLength, usedWords, onFinish, onExit }: RoundScreenProps) {
-  const category = getCategoryById(categoryId);
-
+export function RoundScreen({ category, roundLength, usedWords, onFinish, onExit }: RoundScreenProps) {
   const deckRef = useRef<string[]>(shuffle(freshWordPool(category.words, usedWords)));
   const [currentWord, setCurrentWord] = useState<string>(deckRef.current[0]);
   const [timeLeft, setTimeLeft] = useState<number>(roundLength);
@@ -73,8 +70,8 @@ export function RoundScreen({ categoryId, roundLength, usedWords, onFinish, onEx
         onFinish({
           correctWords,
           passedWords,
-          categoryId,
           categoryLabel: category.label,
+          descriptions: category.descriptions,
           roundLength,
         });
       }

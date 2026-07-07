@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "api/generate-category.ts": {
+      "maxDuration": 30
+    }
+  }
+}

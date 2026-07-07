@@ -109,6 +109,27 @@
   margin-top: 36px;
 }
 
+.custom-category-section {
+  margin-top: 36px;
+}
+
+.custom-category-input {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--bg-elevated);
+  color: var(--text);
+  font: inherit;
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+
+.custom-category-input:focus {
+  outline: none;
+  border-color: var(--accent-strong);
+}
+
 .feedback-textarea {
   width: 100%;
   min-height: 100px;

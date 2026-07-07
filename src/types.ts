@@ -27,7 +27,8 @@ export type CategoryId =
   | "climbers"
   | "brands"
   | "airports"
-  | "randomMixed";
+  | "randomMixed"
+  | "custom";
 
 export interface CategoryInfo {
   id: CategoryId;
@@ -43,7 +44,7 @@ export type Screen = "setup" | "round" | "results";
 export interface RoundResult {
   correctWords: string[];
   passedWords: string[];
-  categoryId: CategoryId;
   categoryLabel: string;
+  descriptions: Record<string, string>;
   roundLength: RoundLength;
 }

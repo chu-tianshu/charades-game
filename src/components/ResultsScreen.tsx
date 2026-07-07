@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { formatRoundLength } from "../utils/formatRoundLength";
-import { getCategoryById } from "../data/categories";
 import type { RoundResult } from "../types";
 
 interface ResultsScreenProps {
@@ -16,10 +15,12 @@ interface SelectedWord {
 
 export function ResultsScreen({ result, onPlayAgain, onNewRound }: ResultsScreenProps) {
   const [selected, setSelected] = useState<SelectedWord | null>(null);
-  const descriptions = getCategoryById(result.categoryId).descriptions;
 
   function showDescription(word: string) {
-    setSelected({ word, description: descriptions[word] ?? "No description available for this one yet." });
+    setSelected({
+      word,
+      description: result.descriptions[word] ?? "No description available for this one yet.",
+    });
   }
 
   return (
