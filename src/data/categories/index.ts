@@ -25,6 +25,7 @@ import { chineseLandmarks, chineseLandmarksDescriptions } from "./chineseLandmar
 import { chinesePoliticians, chinesePoliticiansDescriptions } from "./chinesePoliticians";
 import { climbing, climbingDescriptions } from "./climbing";
 import { climbers, climbersDescriptions } from "./climbers";
+import { brands, brandsDescriptions } from "./brands";
 
 const allWords = [
   ...movies,
@@ -53,6 +54,7 @@ const allWords = [
   ...chinesePoliticians,
   ...climbing,
   ...climbers,
+  ...brands,
 ];
 
 const allDescriptions: Record<string, string> = {
@@ -82,6 +84,7 @@ const allDescriptions: Record<string, string> = {
   ...chinesePoliticiansDescriptions,
   ...climbingDescriptions,
   ...climbersDescriptions,
+  ...brandsDescriptions,
 };
 
 export const CATEGORIES: CategoryInfo[] = [
@@ -151,6 +154,7 @@ export const CATEGORIES: CategoryInfo[] = [
   },
   { id: "climbing", label: "Climbing", words: climbing, descriptions: climbingDescriptions },
   { id: "climbers", label: "Climbers", words: climbers, descriptions: climbersDescriptions },
+  { id: "brands", label: "Famous Brands", words: brands, descriptions: brandsDescriptions },
   { id: "randomMixed", label: "Random Mixed", words: allWords, descriptions: allDescriptions },
 ];
 
